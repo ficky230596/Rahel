@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 28 Okt 2025 pada 19.02
+-- Waktu pembuatan: 31 Okt 2025 pada 20.34
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -84,66 +84,66 @@ CREATE TABLE `jadwal` (
 --
 
 INSERT INTO `jadwal` (`id`, `tanggal`, `slot`, `pegawai_id`, `regu_id`, `peleton_id`, `pos_id`, `status`, `created_at`, `apel_time`) VALUES
-(317, '2025-10-24', 'pagi', 9, 2, 2, 2, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(318, '2025-10-24', 'pagi', 10, 2, 2, 2, 'izin', '2025-10-24 15:28:11', '00:00:00'),
-(319, '2025-10-25', 'pagi', 8, 3, 3, 1, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(320, '2025-10-25', 'pagi', 8, 4, 3, 1, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(321, '2025-10-25', 'pagi', 7, 4, 3, 1, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(322, '2025-10-25', 'pagi', 5, 4, 3, 1, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(323, '2025-10-26', 'pagi', 6, 1, 5, 2, 'aktif', '2025-10-24 15:28:11', '01:56:00'),
-(324, '2025-10-27', 'pagi', 10, 2, 2, 2, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(325, '2025-10-28', 'pagi', 8, 3, 3, 1, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(326, '2025-10-28', 'pagi', 8, 4, 3, 1, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(327, '2025-10-28', 'pagi', 5, 4, 3, 1, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(328, '2025-10-29', 'pagi', 6, 1, 5, 2, 'aktif', '2025-10-24 15:28:11', '01:54:00'),
-(329, '2025-10-30', 'pagi', 9, 2, 2, 2, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(330, '2025-10-30', 'pagi', 10, 2, 2, 2, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(331, '2025-10-31', 'pagi', 8, 3, 3, 1, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(332, '2025-10-31', 'pagi', 8, 4, 3, 1, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(333, '2025-10-31', 'pagi', 7, 4, 3, 1, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(334, '2025-10-31', 'pagi', 5, 4, 3, 1, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(335, '2025-11-01', 'pagi', 6, 1, 5, 2, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(336, '2025-11-02', 'pagi', 9, 2, 2, 2, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(337, '2025-11-02', 'pagi', 10, 2, 2, 2, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(338, '2025-11-03', 'pagi', 8, 3, 3, 1, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(339, '2025-11-03', 'pagi', 8, 4, 3, 1, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(340, '2025-11-03', 'pagi', 7, 4, 3, 1, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(341, '2025-11-03', 'pagi', 5, 4, 3, 1, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(342, '2025-11-04', 'pagi', 6, 1, 5, 2, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(343, '2025-11-05', 'pagi', 10, 2, 2, 2, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(344, '2025-11-06', 'pagi', 8, 3, 3, 1, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(345, '2025-11-06', 'pagi', 7, 4, 3, 1, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(346, '2025-11-06', 'pagi', 5, 4, 3, 1, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(347, '2025-11-08', 'pagi', 9, 2, 2, 2, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(348, '2025-11-08', 'pagi', 10, 2, 2, 2, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(349, '2025-11-09', 'pagi', 8, 3, 3, 1, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(350, '2025-11-09', 'pagi', 8, 4, 3, 1, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(351, '2025-11-09', 'pagi', 5, 4, 3, 1, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(352, '2025-11-11', 'pagi', 9, 2, 2, 2, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(353, '2025-11-11', 'pagi', 10, 2, 2, 2, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(354, '2025-11-12', 'pagi', 8, 3, 3, 1, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(355, '2025-11-12', 'pagi', 8, 4, 3, 1, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(356, '2025-11-12', 'pagi', 7, 4, 3, 1, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(357, '2025-11-12', 'pagi', 5, 4, 3, 1, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(358, '2025-11-13', 'pagi', 6, 1, 5, 2, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(359, '2025-11-14', 'pagi', 9, 2, 2, 2, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(360, '2025-11-14', 'pagi', 10, 2, 2, 2, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(361, '2025-11-15', 'pagi', 8, 3, 3, 1, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(362, '2025-11-15', 'pagi', 8, 4, 3, 1, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(363, '2025-11-15', 'pagi', 7, 4, 3, 1, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(364, '2025-11-15', 'pagi', 5, 4, 3, 1, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(365, '2025-11-17', 'pagi', 9, 2, 2, 2, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(366, '2025-11-17', 'pagi', 10, 2, 2, 2, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(367, '2025-11-18', 'pagi', 8, 3, 3, 1, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(368, '2025-11-18', 'pagi', 8, 4, 3, 1, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(369, '2025-11-18', 'pagi', 5, 4, 3, 1, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(370, '2025-11-19', 'pagi', 6, 1, 5, 2, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(371, '2025-11-20', 'pagi', 9, 2, 2, 2, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(372, '2025-11-20', 'pagi', 10, 2, 2, 2, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(373, '2025-11-21', 'pagi', 8, 3, 3, 1, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(374, '2025-11-21', 'pagi', 8, 4, 3, 1, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(375, '2025-11-21', 'pagi', 5, 4, 3, 1, 'aktif', '2025-10-24 15:28:11', '00:00:00'),
-(376, '2025-11-22', 'pagi', 6, 1, 5, 2, 'aktif', '2025-10-24 15:28:11', '00:00:00');
+(1, '2025-10-31', 'pagi', 10, 2, 2, 2, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(2, '2025-11-01', 'pagi', 8, 3, 3, 1, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(3, '2025-11-01', 'pagi', 7, 4, 3, 1, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(4, '2025-11-01', 'pagi', 5, 4, 3, 1, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(5, '2025-11-01', 'pagi', 16, 8, 3, 3, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(6, '2025-11-02', 'pagi', 6, 1, 5, 2, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(7, '2025-11-03', 'pagi', 10, 2, 2, 2, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(8, '2025-11-04', 'pagi', 8, 3, 3, 1, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(9, '2025-11-04', 'pagi', 7, 4, 3, 1, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(10, '2025-11-04', 'pagi', 5, 4, 3, 1, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(11, '2025-11-04', 'pagi', 16, 8, 3, 3, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(12, '2025-11-05', 'pagi', 6, 1, 5, 2, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(13, '2025-11-06', 'pagi', 10, 2, 2, 2, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(14, '2025-11-07', 'pagi', 8, 3, 3, 1, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(15, '2025-11-07', 'pagi', 7, 4, 3, 1, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(16, '2025-11-07', 'pagi', 5, 4, 3, 1, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(17, '2025-11-07', 'pagi', 16, 8, 3, 3, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(18, '2025-11-08', 'pagi', 6, 1, 5, 2, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(19, '2025-11-09', 'pagi', 10, 2, 2, 2, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(20, '2025-11-10', 'pagi', 8, 3, 3, 1, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(21, '2025-11-10', 'pagi', 7, 4, 3, 1, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(22, '2025-11-10', 'pagi', 5, 4, 3, 1, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(23, '2025-11-10', 'pagi', 16, 8, 3, 3, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(24, '2025-11-11', 'pagi', 6, 1, 5, 2, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(25, '2025-11-12', 'pagi', 10, 2, 2, 2, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(26, '2025-11-13', 'pagi', 8, 3, 3, 1, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(27, '2025-11-13', 'pagi', 7, 4, 3, 1, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(28, '2025-11-13', 'pagi', 5, 4, 3, 1, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(29, '2025-11-13', 'pagi', 16, 8, 3, 3, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(30, '2025-11-14', 'pagi', 6, 1, 5, 2, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(31, '2025-11-15', 'pagi', 10, 2, 2, 2, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(32, '2025-11-16', 'pagi', 8, 3, 3, 1, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(33, '2025-11-16', 'pagi', 7, 4, 3, 1, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(34, '2025-11-16', 'pagi', 5, 4, 3, 1, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(35, '2025-11-16', 'pagi', 16, 8, 3, 3, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(36, '2025-11-17', 'pagi', 6, 1, 5, 2, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(37, '2025-11-18', 'pagi', 10, 2, 2, 2, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(38, '2025-11-19', 'pagi', 8, 3, 3, 1, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(39, '2025-11-19', 'pagi', 7, 4, 3, 1, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(40, '2025-11-19', 'pagi', 5, 4, 3, 1, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(41, '2025-11-19', 'pagi', 16, 8, 3, 3, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(42, '2025-11-20', 'pagi', 6, 1, 5, 2, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(43, '2025-11-21', 'pagi', 10, 2, 2, 2, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(44, '2025-11-22', 'pagi', 8, 3, 3, 1, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(45, '2025-11-22', 'pagi', 7, 4, 3, 1, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(46, '2025-11-22', 'pagi', 5, 4, 3, 1, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(47, '2025-11-22', 'pagi', 16, 8, 3, 3, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(48, '2025-11-23', 'pagi', 6, 1, 5, 2, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(49, '2025-11-24', 'pagi', 10, 2, 2, 2, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(50, '2025-11-25', 'pagi', 8, 3, 3, 1, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(51, '2025-11-25', 'pagi', 7, 4, 3, 1, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(52, '2025-11-25', 'pagi', 5, 4, 3, 1, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(53, '2025-11-25', 'pagi', 16, 8, 3, 3, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(54, '2025-11-26', 'pagi', 6, 1, 5, 2, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(55, '2025-11-27', 'pagi', 10, 2, 2, 2, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(56, '2025-11-28', 'pagi', 8, 3, 3, 1, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(57, '2025-11-28', 'pagi', 7, 4, 3, 1, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(58, '2025-11-28', 'pagi', 5, 4, 3, 1, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(59, '2025-11-28', 'pagi', 16, 8, 3, 3, 'aktif', '2025-10-31 12:31:02', '00:00:00'),
+(60, '2025-11-29', 'pagi', 6, 1, 5, 2, 'aktif', '2025-10-31 12:31:02', '00:00:00');
 
 -- --------------------------------------------------------
 
@@ -165,9 +165,10 @@ CREATE TABLE `notification_log` (
 --
 
 INSERT INTO `notification_log` (`id`, `jadwal_id`, `pegawai_id`, `notification_type`, `message_sent`, `sent_at`) VALUES
-(2, 328, 6, 'before_call', 'Peringatan: Apel akan segera dimulai dalam 30 menit!\n\nFriska Regina Maralantang dari Peleton YUDAH, segera merapat ke MANDOLANG!', '2025-10-25 01:31:33'),
-(3, 323, 6, 'before_duty', 'Selamat Pagi, Friska Regina Maralantang!\r\n\r\nAnda memiliki tugas besok:\r\n- Peleton: YUDAH\r\n- Regu: 10\r\n- Pos: MANDOLANG\r\n- Tugas: Tugas Regu\r\n- Tanggal Tugas: 26-10-2025\r\n\r\nHarap siapkan diri!', '2025-10-25 01:56:01'),
-(4, 323, 6, 'before_call', 'Peringatan: Apel akan segera dimulai dalam 30 menit!\r\n\r\nFriska Regina Maralantang dari Peleton YUDAH, segera merapat ke MANDOLANG!', '2025-10-25 01:56:02');
+(1, 4, 5, 'before_duty', 'Selamat Pagi, budi!\r\n\r\nAnda memiliki tugas besok:\r\n- Peleton: JAYA\r\n- Regu: 70\r\n- Pos: KAWANGKOWAN\r\n- Tugas: Jaga\r\n- Tanggal Tugas: 01-11-2025\r\n\r\nHarap siapkan diri!', '2025-10-31 20:31:13'),
+(2, 3, 7, 'before_duty', 'Selamat Pagi, ing!\r\n\r\nAnda memiliki tugas besok:\r\n- Peleton: JAYA\r\n- Regu: 70\r\n- Pos: KAWANGKOWAN\r\n- Tugas: Selang\r\n- Tanggal Tugas: 01-11-2025\r\n\r\nHarap siapkan diri!', '2025-10-31 20:31:13'),
+(3, 2, 8, 'before_duty', 'Selamat Pagi, Marko!\r\n\r\nAnda memiliki tugas besok:\r\n- Peleton: JAYA\r\n- Regu: 10\r\n- Pos: KAWANGKOWAN\r\n- Tugas: Selang\r\n- Tanggal Tugas: 01-11-2025\r\n\r\nHarap siapkan diri!', '2025-10-31 20:31:14'),
+(4, 5, 16, 'before_duty', 'Selamat Pagi, Basilius Mario Vikranta Rahanubun!\r\n\r\nAnda memiliki tugas besok:\r\n- Peleton: JAYA\r\n- Regu: 10\r\n- Pos: KANTOR\r\n- Tugas: Danru/Operator\r\n- Tanggal Tugas: 01-11-2025\r\n\r\nHarap siapkan diri!', '2025-10-31 20:31:15');
 
 -- --------------------------------------------------------
 
@@ -236,7 +237,7 @@ CREATE TABLE `pegawai` (
   `nama` varchar(150) DEFAULT NULL,
   `jenis_kelamin` enum('Laki-laki','Perempuan') DEFAULT NULL,
   `nip` varchar(50) DEFAULT NULL,
-  `pangkat` varchar(50) DEFAULT NULL,
+  `status_kepegawaian` varchar(50) DEFAULT NULL,
   `no_hp` varchar(20) DEFAULT NULL,
   `telegram_id` varchar(50) DEFAULT NULL,
   `golongan` varchar(50) DEFAULT NULL,
@@ -251,14 +252,15 @@ CREATE TABLE `pegawai` (
 -- Dumping data untuk tabel `pegawai`
 --
 
-INSERT INTO `pegawai` (`id`, `username`, `password_hash`, `nama`, `jenis_kelamin`, `nip`, `pangkat`, `no_hp`, `telegram_id`, `golongan`, `ruang`, `jabatan`, `tugas`, `role`, `created_at`) VALUES
+INSERT INTO `pegawai` (`id`, `username`, `password_hash`, `nama`, `jenis_kelamin`, `nip`, `status_kepegawaian`, `no_hp`, `telegram_id`, `golongan`, `ruang`, `jabatan`, `tugas`, `role`, `created_at`) VALUES
 (2, 'admin', '$2y$10$M.6lRqN6tlYHOaQDgJ7BHOoXKhry7Q3nGQSUyPZdS1.xY3l5Vjh0S', 'Administrator Utama', 'Laki-laki', NULL, NULL, '6282248139051', NULL, NULL, NULL, NULL, NULL, 'admin', '2025-10-20 16:52:28'),
 (5, 'Petugas1', '$2y$10$4HyjpjtLE.YoeEF3x.qHION15Z79xEbm5G9.35/j29AYX0SO9pQLe', 'budi', 'Laki-laki', '1234567890', '3C', '6282248139051', NULL, 'III', 'A', 'Kepala Dinas', 'Jaga', 'petugas', '2025-10-21 03:05:48'),
 (6, 'Petugas2', '$2y$10$9DIN4lmnB92UcdKE0RoZSu3s4S0pl6n1aMIRozO09aibR0EE6b7ja', 'Friska Regina Maralantang', 'Perempuan', '0987654321', '5', '6282248139051', NULL, 'Penata muda', 'Lapangan', '', 'Selang', 'petugas', '2025-10-21 03:14:13'),
-(7, 'Petugas3', '$2y$10$iCWBqvO/e.uQcnMd6kt9PuAAigbjrnaWqqncDGtvLbyWQFj7Uhd1y', 'ing', 'Laki-laki', '09876543215', '3C', '6282197928207', NULL, 'Penata Muda 3', 'A', 'Anggota', 'Selang', 'petugas', '2025-10-21 03:52:10'),
+(7, 'Petugas3', '$2y$10$iCWBqvO/e.uQcnMd6kt9PuAAigbjrnaWqqncDGtvLbyWQFj7Uhd1y', 'ing', 'Laki-laki', '09876543215', 'TENAGA OUTSOURCING', '6289694801197', NULL, 'Penata Muda 3', 'A', 'PENGELOLA UMUM OPERASIONAL', 'Selang', 'petugas', '2025-10-21 03:52:10'),
 (8, 'Petugas4', '$2y$10$gavFAlvJd/SqSdtLtW9Tge6ZR46EmCM35fSW8lE.iPXJmmDs2gKJu', 'Marko', 'Perempuan', '35359309', 'Listrik', '62858248502844', NULL, 'II', 'C', '', 'Selang', 'petugas', '2025-10-21 12:17:22'),
 (9, 'user23', '$2y$10$wtClVT0iVubFONbf1/9Uo.3w0C0v.DJir4abwixjsn57gCuTDxNtG', 'Mario', 'Laki-laki', '3423ffefef', '4C', '6289531012296', NULL, 'Penata Muda 3', 'A', 'Guru', 'Selang', 'petugas', '2025-10-23 17:51:52'),
-(10, 'user2', '$2y$10$ug1LvS3hSY6rd2anBuTl/uPO/R6mpgtVG6pYWSpbisatEmVxHeBe2', 'TPA Suwung', 'Laki-laki', '43452353rt', 'staf', '6289531012296', NULL, 'Penata Muda 3', 'A', 'Kepala Sekolah', 'Selang', 'petugas', '2025-10-23 18:03:59');
+(10, 'user2', '$2y$10$ug1LvS3hSY6rd2anBuTl/uPO/R6mpgtVG6pYWSpbisatEmVxHeBe2', 'TPA Suwung', 'Laki-laki', '43452353rt', 'staf', '6289531012296', NULL, 'Penata Muda 3', 'A', 'Kepala Sekolah', 'Selang', 'petugas', '2025-10-23 18:03:59'),
+(16, 'admin23', '$2y$10$GFGuNF2n6mJeM96oCEiUXe1MQ01OQg0TcHJpOyU/uwFjnCINxGhmK', 'Basilius Mario Vikranta Rahanubun', 'Perempuan', '098765432121', 'PNS', '6282248139051', NULL, 'II', '2', 'PETUGAS PEMADAM KEBAKARAN', 'Danru/Operator', 'petugas', '2025-10-31 11:27:08');
 
 -- --------------------------------------------------------
 
@@ -278,13 +280,12 @@ CREATE TABLE `pegawai_regu` (
 --
 
 INSERT INTO `pegawai_regu` (`id`, `pegawai_id`, `regu_id`, `pos_id`) VALUES
-(14, 9, 2, NULL),
 (15, 8, 3, NULL),
-(16, 8, 4, NULL),
 (19, 7, 4, NULL),
 (20, 10, 2, NULL),
 (21, 5, 4, NULL),
-(23, 6, 1, NULL);
+(23, 6, 1, NULL),
+(27, 16, 8, NULL);
 
 -- --------------------------------------------------------
 
@@ -350,7 +351,10 @@ INSERT INTO `regu` (`id`, `peleton_id`, `pos_id`, `nama`) VALUES
 (2, 2, 2, '10'),
 (3, 3, 1, '10'),
 (4, 3, 1, '70'),
-(5, 5, 3, '70');
+(5, 5, 3, '70'),
+(6, 3, 3, '10'),
+(7, 3, 1, '10'),
+(8, 3, 3, '10');
 
 --
 -- Indexes for dumped tables
@@ -447,7 +451,7 @@ ALTER TABLE `izin`
 -- AUTO_INCREMENT untuk tabel `jadwal`
 --
 ALTER TABLE `jadwal`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=377;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT untuk tabel `notification_log`
@@ -477,13 +481,13 @@ ALTER TABLE `notifikasi_log`
 -- AUTO_INCREMENT untuk tabel `pegawai`
 --
 ALTER TABLE `pegawai`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT untuk tabel `pegawai_regu`
 --
 ALTER TABLE `pegawai_regu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT untuk tabel `peleton`
@@ -501,7 +505,7 @@ ALTER TABLE `pos`
 -- AUTO_INCREMENT untuk tabel `regu`
 --
 ALTER TABLE `regu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)

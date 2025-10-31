@@ -7,5 +7,5 @@ php send_notifications.php
 
 push Github
 git add .
-git commit -m "update terbaru"
+git commit -m "perbaiki notif"
 git push
