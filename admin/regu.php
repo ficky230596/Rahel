@@ -13,7 +13,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
 if (isset($_POST['create'])) {
     $peleton_id = $_POST['peleton_id'];
     $pos_id = $_POST['pos_id']; // <-- BARU: Ambil ID Pos
-    $nama = $_POST['nama'];
+    $nama = $_POST['regu'];
 
     // UPDATE QUERY: Tambahkan pos_id
     $stmt = $pdo->prepare("INSERT INTO regu (peleton_id, pos_id, nama) VALUES (?, ?, ?)");
@@ -28,7 +28,7 @@ if (isset($_POST['edit'])) {
     $id = $_POST['id'];
     $peleton_id = $_POST['peleton_id'];
     $pos_id = $_POST['pos_id']; // <-- BARU: Ambil ID Pos
-    $nama = $_POST['nama'];
+    $nama = $_POST['regu'];
 
     // UPDATE QUERY: Tambahkan pos_id
     $stmt = $pdo->prepare("UPDATE regu SET peleton_id=?, pos_id=?, nama=? WHERE id=?");
@@ -74,10 +74,12 @@ $peletons = $pdo->query("SELECT id, nama FROM peleton ORDER BY id DESC")->fetchA
 $rows = $pdo->query("SELECT r.*, p.nama as peleton_nama, ps.nama as pos_nama 
                      FROM regu r 
                      LEFT JOIN peleton p ON r.peleton_id=p.id 
-                     LEFT JOIN pos ps ON r.pos_id=ps.id /* <-- BARU: JOIN POS */
+                     LEFT JOIN pos ps ON r.pos_id=ps.id
                      ORDER BY r.id DESC")->fetchAll();
 
-$pegawai = $pdo->query("SELECT id, nama FROM pegawai ORDER BY nama ASC")->fetchAll();
+// Ambil data pegawai yang BELUM terdaftar di pegawai_regu
+// Ini memastikan pegawai yang sudah dipilih di regu mana pun tidak muncul di dropdown pilihan.
+$pegawai = $pdo->query("SELECT id, nama FROM pegawai WHERE id NOT IN (SELECT pegawai_id FROM pegawai_regu) ORDER BY nama ASC")->fetchAll();
 
 include 'header.php';
 include 'sidebar.php';
@@ -90,12 +92,14 @@ include 'sidebar.php';
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>CRUD Regu</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Tom Select (vanilla, Bootstrap-styled) untuk searchable select -->
+    <link href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.bootstrap5.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/admin/regu.css">
 </head>
 
 <body>
 
- 
+
     <div class="container py-4">
         <h3>Manajemen Regu</h3>
         <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#mAdd">Tambah Regu</button>
@@ -131,20 +135,30 @@ include 'sidebar.php';
                                     $anggota->execute([$r['id']]);
                                     foreach ($anggota as $a) {
                                         echo "<span class='badge bg-primary'>" . htmlspecialchars($a['nama']) .
-                                            " <a href='?hapus_anggota=" . $a['anggota_id'] . "' class='text-white ms-1' style='text-decoration:none;'>&times;</a></span>";
+                                            " <a href='?hapus_anggota=" . $a['anggota_id'] . "' class='text-white ms-1' style='text-decoration:none;'>&times;</a></span> ";
                                     }
                                     ?>
                                 </div>
 
                                 <form method="post" class="d-flex mt-2">
                                     <input type="hidden" name="regu_id" value="<?= $r['id'] ?>">
-                                    <select name="pegawai_id" class="form-select form-select-sm me-2" required>
-                                        <option value="">-- Pilih Pegawai --</option>
-                                        <?php foreach ($pegawai as $pg): ?>
-                                            <option value="<?= $pg['id'] ?>"><?= htmlspecialchars($pg['nama']) ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                    <button class="btn btn-sm btn-success" name="tambah_anggota">Tambah</button>
+
+                                    <?php if (count($pegawai) === 0): ?>
+                                        <!-- Tidak ada pegawai yang tersedia -->
+                                        <select class="form-select form-select-sm me-2" disabled>
+                                            <option>Tidak ada pegawai tersedia (semua sudah dipilih)</option>
+                                        </select>
+                                        <button class="btn btn-sm btn-success" disabled>Tambah</button>
+                                    <?php else: ?>
+                                        <!-- Searchable Select: tambahkan class tom-pegawai -->
+                                        <select name="pegawai_id" class="form-select form-select-sm me-2 tom-pegawai" required>
+                                            <option value="">-- Pilih Pegawai --</option>
+                                            <?php foreach ($pegawai as $pg): ?>
+                                                <option value="<?= $pg['id'] ?>"><?= htmlspecialchars($pg['nama']) ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                        <button class="btn btn-sm btn-success" name="tambah_anggota">Tambah</button>
+                                    <?php endif; ?>
                                 </form>
                             </td>
                             <td>
@@ -163,9 +177,30 @@ include 'sidebar.php';
                                         </div>
                                         <div class="modal-body">
                                             <input type="hidden" name="id" value="<?= $r['id'] ?>">
-                                            <div class="mb-2"><label>Nama Regu</label>
-                                                <input name="nama" value="<?= htmlspecialchars($r['nama']) ?>" class="form-control" required>
+                                            <div class="mb-2">
+                                                <label>Nama Regu</label>
+                                                <select name="regu" class="form-select" required>
+                                                    <!-- Tampilkan dulu regu yang sedang aktif -->
+                                                    <option value="<?= htmlspecialchars($r['nama']) ?>" selected>
+                                                        <?= htmlspecialchars($r['nama']) ?> (Saat ini)
+                                                    </option>
+
+                                                    <!-- Garis pemisah -->
+                                                    <option disabled>──────────────</option>
+
+                                                    <!-- Pilihan regu lain -->
+                                                    <option value="10">Regu 10</option>
+                                                    <option value="20">Regu 20</option>
+                                                    <option value="30">Regu 30</option>
+                                                    <option value="40">Regu 40</option>
+                                                    <option value="50">Regu 50</option>
+                                                    <option value="60">Regu 60</option>
+                                                    <option value="70">Regu 70</option>
+                                                    <option value="80">Regu 80</option>
+                                                </select>
                                             </div>
+
+
                                             <div class="mb-2"><label>Peleton</label>
                                                 <select name="peleton_id" class="form-control" required>
                                                     <?php foreach ($peletons as $p): ?>
@@ -228,10 +263,6 @@ include 'sidebar.php';
                                 <?php endforeach; ?>
                             </select>
                         </div>
-                        <!-- <div class="mb-2">
-                            <label for="nama_regu">Nama Regu</label>
-                            <input type="text" id="nama_regu" name="nama" class="form-control" required>
-                        </div> -->
 
                         <div class="mb-2">
                             <label for="pilih_regu">Pilih Regu</label>
@@ -257,7 +288,27 @@ include 'sidebar.php';
         </div>
     </div>
 
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Tom Select JS -->
+    <script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js"></script>
+
+    <script>
+        // Inisialisasi Tom Select untuk semua select pemilihan pegawai ( hanya bila ada )
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.tom-pegawai').forEach(function(el) {
+                // Tom Select akan menggantikan select asli, searchable by text
+                new TomSelect(el, {
+                    allowEmptyOption: true,
+                    placeholder: "-- Cari / Pilih Pegawai --",
+                    sortField: {
+                        field: "text",
+                        direction: "asc"
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>

@@ -3,3 +3,9 @@ cd C:\xampp\htdocs\damkar_scheduler_2\admin
 
 2. Lalu jalankan script-nya dengan perintah:
 php send_notifications.php
+
+
+push Github
+git add .
+git commit -m "update terbaru"
+git push

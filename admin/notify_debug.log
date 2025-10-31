@@ -1,0 +1,136 @@
+2025-10-31 20:29:57 - before_duty: jadwal_id=4, pegawai_id=5, tugas=[EMPTY]
+2025-10-31 20:29:57 - template: Selamat Pagi, [NAMA]!
+
+Anda memiliki tugas besok:
+- Peleton: [PELETON]
+- Regu: [REGU]
+- Pos: [POS]
+- Tugas: [TUGAS]
+- Tanggal Tugas: [TANGGAL]
+
+Harap siapkan diri!
+2025-10-31 20:29:57 - message: Selamat Pagi, budi!
+
+Anda memiliki tugas besok:
+- Peleton: JAYA
+- Regu: 70
+- Pos: KAWANGKOWAN
+- Tugas: 
+- Tanggal Tugas: 01-11-2025
+
+Harap siapkan diri!
+2025-10-31 20:29:59 - sent: jadwal_id=4 logged
+2025-10-31 20:29:59 - before_duty: jadwal_id=3, pegawai_id=7, tugas=[EMPTY]
+2025-10-31 20:29:59 - template: Selamat Pagi, [NAMA]!
+
+Anda memiliki tugas besok:
+- Peleton: [PELETON]
+- Regu: [REGU]
+- Pos: [POS]
+- Tugas: [TUGAS]
+- Tanggal Tugas: [TANGGAL]
+
+Harap siapkan diri!
+2025-10-31 20:29:59 - message: Selamat Pagi, ing!
+
+Anda memiliki tugas besok:
+- Peleton: JAYA
+- Regu: 70
+- Pos: KAWANGKOWAN
+- Tugas: 
+- Tanggal Tugas: 01-11-2025
+
+Harap siapkan diri!
+2025-10-31 20:30:00 - sent: jadwal_id=3 logged
+2025-10-31 20:30:00 - before_duty: jadwal_id=2, pegawai_id=8, tugas=[EMPTY]
+2025-10-31 20:30:00 - template: Selamat Pagi, [NAMA]!
+
+Anda memiliki tugas besok:
+- Peleton: [PELETON]
+- Regu: [REGU]
+- Pos: [POS]
+- Tugas: [TUGAS]
+- Tanggal Tugas: [TANGGAL]
+
+Harap siapkan diri!
+2025-10-31 20:30:00 - message: Selamat Pagi, Marko!
+
+Anda memiliki tugas besok:
+- Peleton: JAYA
+- Regu: 10
+- Pos: KAWANGKOWAN
+- Tugas: 
+- Tanggal Tugas: 01-11-2025
+
+Harap siapkan diri!
+2025-10-31 20:30:01 - sent: jadwal_id=2 logged
+2025-10-31 20:30:01 - before_duty: jadwal_id=5, pegawai_id=16, tugas=[EMPTY]
+2025-10-31 20:30:01 - template: Selamat Pagi, [NAMA]!
+
+Anda memiliki tugas besok:
+- Peleton: [PELETON]
+- Regu: [REGU]
+- Pos: [POS]
+- Tugas: [TUGAS]
+- Tanggal Tugas: [TANGGAL]
+
+Harap siapkan diri!
+2025-10-31 20:30:01 - message: Selamat Pagi, Basilius Mario Vikranta Rahanubun!
+
+Anda memiliki tugas besok:
+- Peleton: JAYA
+- Regu: 10
+- Pos: KANTOR
+- Tugas: 
+- Tanggal Tugas: 01-11-2025
+
+Harap siapkan diri!
+2025-10-31 20:30:02 - sent: jadwal_id=5 logged
+2025-10-31 20:31:12 - before_duty: jadwal_id=4, pegawai_id=5, jadwal.tugas=[NO-COL], pegawai.tugas=Jaga
+2025-10-31 20:31:12 - message: Selamat Pagi, budi!
+
+Anda memiliki tugas besok:
+- Peleton: JAYA
+- Regu: 70
+- Pos: KAWANGKOWAN
+- Tugas: Jaga
+- Tanggal Tugas: 01-11-2025
+
+Harap siapkan diri!
+2025-10-31 20:31:13 - sent: jadwal_id=4 logged
+2025-10-31 20:31:13 - before_duty: jadwal_id=3, pegawai_id=7, jadwal.tugas=[NO-COL], pegawai.tugas=Selang
+2025-10-31 20:31:13 - message: Selamat Pagi, ing!
+
+Anda memiliki tugas besok:
+- Peleton: JAYA
+- Regu: 70
+- Pos: KAWANGKOWAN
+- Tugas: Selang
+- Tanggal Tugas: 01-11-2025
+
+Harap siapkan diri!
+2025-10-31 20:31:13 - sent: jadwal_id=3 logged
+2025-10-31 20:31:14 - before_duty: jadwal_id=2, pegawai_id=8, jadwal.tugas=[NO-COL], pegawai.tugas=Selang
+2025-10-31 20:31:14 - message: Selamat Pagi, Marko!
+
+Anda memiliki tugas besok:
+- Peleton: JAYA
+- Regu: 10
+- Pos: KAWANGKOWAN
+- Tugas: Selang
+- Tanggal Tugas: 01-11-2025
+
+Harap siapkan diri!
+2025-10-31 20:31:14 - sent: jadwal_id=2 logged
+2025-10-31 20:31:14 - before_duty: jadwal_id=5, pegawai_id=16, jadwal.tugas=[NO-COL], pegawai.tugas=Danru/Operator
+2025-10-31 20:31:14 - message: Selamat Pagi, Basilius Mario Vikranta Rahanubun!
+
+Anda memiliki tugas besok:
+- Peleton: JAYA
+- Regu: 10
+- Pos: KANTOR
+- Tugas: Danru/Operator
+- Tanggal Tugas: 01-11-2025
+
+Harap siapkan diri!
+2025-10-31 20:31:15 - sent: jadwal_id=5 logged
