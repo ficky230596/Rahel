@@ -1,0 +1,150 @@
+/* ============================================
+   🔥 STYLE: VERIFIKASI IZIN - DAMKAR DASHBOARD
+   ============================================ */
+
+body {
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(180deg, #1a1a1a 0%, #2c2c2c 100%);
+    color: #222;
+    margin: 0;
+    padding-top: 50px;
+    /* ruang atas untuk navbar */
+}
+
+/* ==============================
+   🔴 JUDUL & CONTAINER
+   ============================== */
+.container {
+    background: linear-gradient(90deg, #ff1a1a, #ff5c00);
+    border-radius: 14px;
+    padding: 30px;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+    color: #fff;
+}
+
+h3 {
+    font-weight: 700;
+    color: #b30000;
+    margin-bottom: 25px;
+    border-left: 6px solid #b30000;
+    padding-left: 12px;
+}
+
+/* ==============================
+   🔍 PENCARIAN
+   ============================== */
+#searchInput {
+    border-radius: 8px;
+    border: 2px solid #ccc;
+    padding: 8px 12px;
+    width: 300px;
+    transition: 0.3s;
+}
+
+#searchInput:focus {
+    border-color: #b30000;
+    box-shadow: 0 0 5px rgba(179, 0, 0, 0.4);
+}
+
+.search-bar {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+}
+
+/* ==============================
+   🧾 TABEL
+   ============================== */
+.table {
+    background: linear-gradient(90deg, #ff1a1a, #ff5c00);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+}
+
+.table thead {
+    background: #b30000;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.table th,
+.table td {
+    text-align: center;
+    vertical-align: middle;
+    padding: 10px 8px;
+    color: #ffffff;
+    background: linear-gradient(90deg, #ff1a1a, #ff5c00);
+}
+
+.table-hover tbody tr:hover {
+    background: #fff0f0;
+}
+
+.badge {
+    font-weight: 600;
+    padding: 6px 10px;
+    border-radius: 8px;
+    text-transform: capitalize;
+}
+
+/* Warna status */
+.badge.bg-success {
+    background-color: #00b050 !important;
+}
+
+.badge.bg-danger {
+    background-color: #ff4d4d !important;
+}
+
+.badge.bg-warning {
+    background-color: #ffcc00 !important;
+    color: #222 !important;
+}
+
+/* ==============================
+   🧩 BUTTON STYLE
+   ============================== */
+.btn {
+    border-radius: 8px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-success {
+    background: linear-gradient(90deg, #00b050, #00d060);
+    border: none;
+}
+
+.btn-success:hover {
+    background: linear-gradient(90deg, #009040, #00b050);
+}
+
+.btn-danger {
+    background: linear-gradient(90deg, #d90429, #ef233c);
+    border: none;
+}
+
+.btn-danger:hover {
+    background: linear-gradient(90deg, #a30000, #d90429);
+}
+
+/* ==============================
+   📱 RESPONSIVE FIX
+   ============================== */
+@media (max-width: 768px) {
+    #searchInput {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .container {
+        padding: 20px;
+    }
+
+    .table {
+        font-size: 0.9rem;
+    }
+}

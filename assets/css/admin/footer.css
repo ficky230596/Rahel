@@ -1,0 +1,31 @@
+/* =========================================
+   FOOTER - DAMKAR STYLE
+   ========================================= */
+.footer {
+    background: #121212;
+    color: #eee;
+    text-align: center;
+    padding: 20px 10px;
+    font-size: 0.9rem;
+    border-top: 3px solid #ffcc00;
+    margin-top: 50px;
+    position: relative;
+    z-index: 900;
+}
+
+.footer a {
+    color: #ffcc00;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+    color: #ffd633;
+}
+
+.footer small {
+    color: #aaa;
+    display: block;
+    margin-top: 5px;
+}

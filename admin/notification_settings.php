@@ -7,6 +7,8 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     exit;
 }
 
+
+
 $message = $_SESSION['message'] ?? '';
 unset($_SESSION['message']);
 
@@ -137,6 +139,9 @@ function getSetting($key, $field, $default) {
 $offset_duty_hours = round(getSetting('before_duty', 'time_offset', 1440) / 60); 
 $offset_call_minutes = getSetting('before_call', 'time_offset', 30);      
 
+
+include 'header.php';
+include 'sidebar.php';
 ?>
 <!doctype html>
 <html lang="id">
@@ -146,9 +151,9 @@ $offset_call_minutes = getSetting('before_call', 'time_offset', 30);
     <title>Pengaturan Notifikasi</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="../assets/css/admin/notification_settings.css">
 </head>
 <body>
-    <?php include 'inc_nav.php'; // Asumsi ini adalah navigasi Anda ?>
     <div class="container py-4">
         <h3>Pengaturan Notifikasi & Pesan Darurat</h3>
         
@@ -166,10 +171,10 @@ $offset_call_minutes = getSetting('before_call', 'time_offset', 30);
                         <div class="card-body">
                             <div class="form-check form-switch mb-3">
                                 <input class="form-check-input" type="checkbox" id="active_duty" name="active_duty" <?= getSetting('before_duty', 'is_active', 1) ? 'checked' : '' ?>>
-                                <label class="form-check-label" for="active_duty">Aktifkan Notifikasi</label>
+                                <label class="form-check-label" for="active_duty" style="color:white;">Aktifkan Notifikasi</label>
                             </div>
                             <div class="mb-3">
-                                <label for="offset_duty" class="form-label">Waktu Pengiriman (Jam Sebelum Tugas)</label>
+                                <label for="offset_duty" class="form-label" style="color:white;">Waktu Pengiriman (Jam Sebelum Tugas)</label>
                                 <input type="number" id="offset_duty" name="offset_duty" class="form-control" value="<?= $offset_duty_hours ?>" min="1" required>
                                 <div class="form-text">Contoh: Isi **24** untuk dikirim 1 hari sebelum tugas dimulai.</div>
                             </div>
@@ -184,19 +189,19 @@ $offset_call_minutes = getSetting('before_call', 'time_offset', 30);
 
                 <div class="col-md-6">
                     <div class="card mb-4 border-warning">
-                        <div class="card-header bg-warning text-dark">⏰ Notifikasi Apel/Siaga</div>
+                        <div class="card-header bg-warning " style="color:white; ">⏰ Notifikasi Apel/Siaga</div>
                         <div class="card-body">
                             <div class="form-check form-switch mb-3">
                                 <input class="form-check-input" type="checkbox" id="active_call" name="active_call" <?= getSetting('before_call', 'is_active', 1) ? 'checked' : '' ?>>
-                                <label class="form-check-label" for="active_call">Aktifkan Notifikasi</label>
+                                <label class="form-check-label" for="active_call" style="color:white;">Aktifkan Notifikasi</label>
                             </div>
                             <div class="mb-3">
-                                <label for="offset_call" class="form-label">Waktu Pengiriman (Menit Sebelum Apel)</label>
+                                <label for="offset_call" class="form-label" style="color:white;">Waktu Pengiriman (Menit Sebelum Apel)</label>
                                 <input type="number" id="offset_call" name="offset_call" class="form-control" value="<?= $offset_call_minutes ?>" min="1" required>
                                 <div class="form-text">Contoh: Isi **30** untuk dikirim 30 menit sebelum apel.</div>
                             </div>
                             <div class="mb-3">
-                                <label for="template_call" class="form-label">Template Pesan</label>
+                                <label for="template_call" class="form-label" style="color:white;">Template Pesan</label>
                                 <textarea id="template_call" name="template_call" class="form-control" rows="5" required><?= htmlspecialchars(getSetting('before_call', 'message_template', "Peringatan: Apel akan segera dimulai dalam [MENIT] menit!\n\n[NAMA] dari Peleton [PELETON], segera merapat ke [POS]!")) ?></textarea>
                                 <div class="form-text">Gunakan placeholder: **[NAMA], [PELETON], [POS], [MENIT]**</div>
                             </div>
@@ -210,7 +215,7 @@ $offset_call_minutes = getSetting('before_call', 'time_offset', 30);
         <hr class="my-5">
 
         <div class="card border-danger">
-            <div class="card-header bg-danger text-white">🚨 Kirim Pesan Darurat ke Semua Pegawai</div>
+            <div class="card-header bg-danger text-white" style="color:white;">🚨 Kirim Pesan Darurat ke Semua Pegawai</div>
             <div class="card-body">
                 <form method="post">
                     <div class="mb-3">

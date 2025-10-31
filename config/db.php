@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('Asia/Makassar');
 // FILE: config/db.php (Menggunakan PDO)
 $host = 'localhost';
 $db   = 'damkar_scheduler';
@@ -8,9 +9,9 @@ $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 $options = [
-    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    PDO::ATTR_EMULATE_PREPARES   => false,
+     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+     PDO::ATTR_EMULATE_PREPARES   => false,
 ];
 
 try {
@@ -18,4 +19,9 @@ try {
 } catch (\PDOException $e) {
      throw new \PDOException($e->getMessage(), (int)$e->getCode());
 }
-?>
+
+// Ambil daftar bulan & tahun yang ada di tabel jadwal
+$stmt = $pdo->query("SELECT DISTINCT MONTH(tanggal) AS bulan, YEAR(tanggal) AS tahun 
+                     FROM jadwal 
+                     ORDER BY tahun DESC, bulan DESC");
+$bulanTahunTersedia = $stmt->fetchAll(PDO::FETCH_ASSOC);

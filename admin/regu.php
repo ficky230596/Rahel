@@ -8,16 +8,17 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     exit;
 }
 
+
 // Tambah Regu
 if (isset($_POST['create'])) {
     $peleton_id = $_POST['peleton_id'];
     $pos_id = $_POST['pos_id']; // <-- BARU: Ambil ID Pos
     $nama = $_POST['nama'];
-    
+
     // UPDATE QUERY: Tambahkan pos_id
     $stmt = $pdo->prepare("INSERT INTO regu (peleton_id, pos_id, nama) VALUES (?, ?, ?)");
     $stmt->execute([$peleton_id, $pos_id, $nama]);
-    
+
     header('Location: regu.php');
     exit;
 }
@@ -28,11 +29,11 @@ if (isset($_POST['edit'])) {
     $peleton_id = $_POST['peleton_id'];
     $pos_id = $_POST['pos_id']; // <-- BARU: Ambil ID Pos
     $nama = $_POST['nama'];
-    
+
     // UPDATE QUERY: Tambahkan pos_id
     $stmt = $pdo->prepare("UPDATE regu SET peleton_id=?, pos_id=?, nama=? WHERE id=?");
     $stmt->execute([$peleton_id, $pos_id, $nama, $id]);
-    
+
     header('Location: regu.php');
     exit;
 }
@@ -75,8 +76,11 @@ $rows = $pdo->query("SELECT r.*, p.nama as peleton_nama, ps.nama as pos_nama
                      LEFT JOIN peleton p ON r.peleton_id=p.id 
                      LEFT JOIN pos ps ON r.pos_id=ps.id /* <-- BARU: JOIN POS */
                      ORDER BY r.id DESC")->fetchAll();
-                     
+
 $pegawai = $pdo->query("SELECT id, nama FROM pegawai ORDER BY nama ASC")->fetchAll();
+
+include 'header.php';
+include 'sidebar.php';
 ?>
 <!doctype html>
 <html lang="id">
@@ -86,29 +90,12 @@ $pegawai = $pdo->query("SELECT id, nama FROM pegawai ORDER BY nama ASC")->fetchA
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>CRUD Regu</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        /* Gaya kustom untuk memastikan tampilan badge anggota lebih rapi */
-        .anggota-badge-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-            margin-bottom: 5px;
-        }
-        .badge {
-            font-size: 0.8em;
-        }
-        .text-white.ms-1 {
-            opacity: 0.7;
-            transition: opacity 0.2s;
-        }
-        .text-white.ms-1:hover {
-            opacity: 1;
-        }
-    </style>
+    <link rel="stylesheet" href="../assets/css/admin/regu.css">
 </head>
 
 <body>
-    <?php include 'inc_nav.php'; // Asumsikan ini adalah file navigasi Anda ?>
+
+ 
     <div class="container py-4">
         <h3>Manajemen Regu</h3>
         <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#mAdd">Tambah Regu</button>
@@ -120,17 +107,21 @@ $pegawai = $pdo->query("SELECT id, nama FROM pegawai ORDER BY nama ASC")->fetchA
                         <th>ID</th>
                         <th>Nama Regu</th>
                         <th>Peleton</th>
-                        <th>Pos</th> <th>Anggota</th>
+                        <th>Pos</th>
+                        <th>Anggota</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($rows as $r): ?>
+                    <?php
+                    $no = 1; // 🔥 mulai penomoran dari 1
+                    foreach ($rows as $r): ?>
                         <tr>
-                            <td><?= $r['id'] ?></td>
+                            <td><?= $no++ ?></td>
                             <td><?= htmlspecialchars($r['nama']) ?></td>
                             <td><?= htmlspecialchars($r['peleton_nama']) ?></td>
-                            <td><?= htmlspecialchars($r['pos_nama'] ?? 'N/A') ?></td> <td>
+                            <td><?= htmlspecialchars($r['pos_nama'] ?? 'N/A') ?></td>
+                            <td>
                                 <div class="anggota-badge-container">
                                     <?php
                                     $anggota = $pdo->prepare("SELECT ar.id as anggota_id, pg.nama 
@@ -144,7 +135,7 @@ $pegawai = $pdo->query("SELECT id, nama FROM pegawai ORDER BY nama ASC")->fetchA
                                     }
                                     ?>
                                 </div>
-                                
+
                                 <form method="post" class="d-flex mt-2">
                                     <input type="hidden" name="regu_id" value="<?= $r['id'] ?>">
                                     <select name="pegawai_id" class="form-select form-select-sm me-2" required>
@@ -161,7 +152,7 @@ $pegawai = $pdo->query("SELECT id, nama FROM pegawai ORDER BY nama ASC")->fetchA
                                 <a href="?hapus_regu=<?= $r['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Yakin hapus regu ini?')">Hapus</a>
                             </td>
                         </tr>
-                        
+
                         <div class="modal fade" id="mEdit<?= $r['id'] ?>">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -184,7 +175,7 @@ $pegawai = $pdo->query("SELECT id, nama FROM pegawai ORDER BY nama ASC")->fetchA
                                                     <?php endforeach; ?>
                                                 </select>
                                             </div>
-                                            
+
                                             <div class="mb-2"><label>Pos</label>
                                                 <select name="pos_id" class="form-control" required>
                                                     <option value="">-- Pilih Pos --</option>
@@ -195,7 +186,7 @@ $pegawai = $pdo->query("SELECT id, nama FROM pegawai ORDER BY nama ASC")->fetchA
                                                     <?php endforeach; ?>
                                                 </select>
                                             </div>
-                                            </div>
+                                        </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                                             <button class="btn btn-primary" name="edit">Simpan Perubahan</button>
@@ -210,7 +201,7 @@ $pegawai = $pdo->query("SELECT id, nama FROM pegawai ORDER BY nama ASC")->fetchA
             </table>
         </div>
     </div>
-    
+
     <div class="modal fade" id="mAdd" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -228,7 +219,7 @@ $pegawai = $pdo->query("SELECT id, nama FROM pegawai ORDER BY nama ASC")->fetchA
                                 <?php endforeach; ?>
                             </select>
                         </div>
-                        
+
                         <div class="mb-2"><label>Pos</label>
                             <select name="pos_id" class="form-control" required>
                                 <option value="">-- Pilih Pos --</option>
@@ -237,7 +228,25 @@ $pegawai = $pdo->query("SELECT id, nama FROM pegawai ORDER BY nama ASC")->fetchA
                                 <?php endforeach; ?>
                             </select>
                         </div>
-                        <div class="mb-2"><label>Nama Regu</label><input name="nama" class="form-control" required></div>
+                        <!-- <div class="mb-2">
+                            <label for="nama_regu">Nama Regu</label>
+                            <input type="text" id="nama_regu" name="nama" class="form-control" required>
+                        </div> -->
+
+                        <div class="mb-2">
+                            <label for="pilih_regu">Pilih Regu</label>
+                            <select id="pilih_regu" name="regu" class="form-select" required>
+                                <option value="" disabled selected>Regu</option>
+                                <option value="10">Regu 10</option>
+                                <option value="20">Regu 20</option>
+                                <option value="30">Regu 30</option>
+                                <option value="40">Regu 40</option>
+                                <option value="50">Regu 50</option>
+                                <option value="60">Regu 60</option>
+                                <option value="70">Regu 70</option>
+                                <option value="80">Regu 80</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
@@ -247,7 +256,7 @@ $pegawai = $pdo->query("SELECT id, nama FROM pegawai ORDER BY nama ASC")->fetchA
             </div>
         </div>
     </div>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

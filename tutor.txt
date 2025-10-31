@@ -1,0 +1,5 @@
+1. Jalankan perintah ini untuk berpindah ke folder tersebut:
+cd C:\xampp\htdocs\damkar_scheduler_2\admin
+
+2. Lalu jalankan script-nya dengan perintah:
+php send_notifications.php

@@ -1,205 +1,235 @@
 <?php
 session_start();
-require '../config/db.php';
+include "../config/db.php";
+include "header.php";
+include "sidebar.php";
 
-// Cek autentikasi
 if (!isset($_SESSION['user_id'])) {
-    header('Location: ../index.php');
+    header("Location: ../index.php");
     exit;
 }
 
-$id = $_SESSION['user_id'];
+$user_id = $_SESSION['user_id'];
+$tomorrow = date('Y-m-d', strtotime('+1 day'));
 
-// Ambil data user saat ini untuk ditampilkan di sidebar
-$user_stmt = $pdo->prepare('SELECT nama, role FROM pegawai WHERE id = ?');
-$user_stmt->execute([$id]);
-$current_user = $user_stmt->fetch(PDO::FETCH_ASSOC);
-
-// Menggunakan JOIN untuk mengambil nama Peleton, Regu, dan Pos
-$rows = $pdo->prepare('
-    SELECT 
-        j.tanggal, 
-        j.slot, 
-        p.nama AS nama_peleton, 
-        r.nama AS nama_regu, 
-        pos.nama AS nama_pos 
+// Cek apakah ada jadwal besok
+// Ambil jadwal besok
+$stmt = $pdo->prepare("
+    SELECT j.*, p.nama AS peleton_nama, r.nama AS regu_nama, ps.nama AS pos_nama
     FROM jadwal j
     LEFT JOIN peleton p ON j.peleton_id = p.id
     LEFT JOIN regu r ON j.regu_id = r.id
-    LEFT JOIN pos ON j.pos_id = pos.id
-    WHERE j.pegawai_id = ? 
-    ORDER BY j.tanggal ASC  /* <-- Pengurutan Tanggal Awal ke Akhir (ASCENDING) */
-    LIMIT 10
-');
-$rows->execute([$id]);
-$jadwals = $rows->fetchAll(PDO::FETCH_ASSOC);
+    LEFT JOIN pos ps ON j.pos_id = ps.id
+    WHERE j.pegawai_id = ? AND j.tanggal = ? AND j.status = 'aktif'
+    LIMIT 1
+");
+$stmt->execute([$user_id, $tomorrow]);
+$jadwal = $stmt->fetch(PDO::FETCH_ASSOC);
 
-// Tentukan halaman aktif untuk highlight sidebar
-$current_page = basename($_SERVER['PHP_SELF']);
+// Jika tidak ada jadwal besok → cari jadwal terdekat berikutnya
+if (!$jadwal) {
+    $stmt_next = $pdo->prepare("
+        SELECT j.*, p.nama AS peleton_nama, r.nama AS regu_nama, ps.nama AS pos_nama
+        FROM jadwal j
+        LEFT JOIN peleton p ON j.peleton_id = p.id
+        LEFT JOIN regu r ON j.regu_id = r.id
+        LEFT JOIN pos ps ON j.pos_id = ps.id
+        WHERE j.pegawai_id = ? 
+          AND j.tanggal > CURDATE()
+          AND j.status = 'aktif'
+        ORDER BY j.tanggal ASC
+        LIMIT 1
+    ");
+    $stmt_next->execute([$user_id]);
+    $jadwal = $stmt_next->fetch(PDO::FETCH_ASSOC);
+}
 ?>
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta charset="UTF-8">
     <title>Dashboard Petugas</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <style>
         body {
-            background-color: #f8f9fa;
-        }
-
-        #sidebar-wrapper {
+            background: #0f172a;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
             min-height: 100vh;
-            margin-left: 0;
-            /* Default visible in desktop */
-            transition: margin .25s ease-out;
-            background-color: #212529;
-            width: 15rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 50px;
         }
 
-        #sidebar-wrapper .sidebar-heading {
-            padding: 0.875rem 1.25rem;
+        .container {
+            max-width: 900px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 16px;
+            background: linear-gradient(145deg, #1e293b, #0f172a);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            color: #fff;
+            text-align: center;
+            padding: 15px 100px;
+            cursor: pointer;
+            transition: transform .2s ease, box-shadow .2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            background-color: #f59e0b;
+        }
+
+        .card h5 {
+            margin-bottom: 10px;
+            font-weight: 700;
             font-size: 1.2rem;
         }
-
-        #page-content-wrapper {
-            min-width: 100vw;
-            flex-grow: 1;
+        
+        .card.peleton {
+            border-top: 5px solid #ef4444;
         }
 
-        .wrapper {
-            display: flex;
+        .card.regu {
+            border-top: 5px solid #f59e0b;
         }
 
-        /* Style untuk menyembunyikan sidebar di mobile secara default */
-        @media (max-width: 768px) {
-            #sidebar-wrapper {
-                margin-left: -15rem;
-                position: fixed;
-                z-index: 1000;
-            }
+        .card.pos {
+            border-top: 5px solid #10b981;
+        }
 
-            .wrapper.toggled #sidebar-wrapper {
-                margin-left: 0;
-            }
-
-            #page-content-wrapper {
-                min-width: 100%;
-            }
+        .no-schedule {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #94a3b8;
         }
     </style>
 </head>
 
 <body>
-    <div class="d-flex wrapper" id="wrapper">
+    <div class="container">
+        <h3 class="text-center mb-4">
+            Jadwal Piket
+            <?= ($jadwal && $jadwal['tanggal'] == $tomorrow) ? 'Besok' : 'Terdekat' ?>
+            (<?= $jadwal ? date('d M Y', strtotime($jadwal['tanggal'])) : date('d M Y', strtotime($tomorrow)) ?>)
+        </h3>
 
-        <div class="border-right" id="sidebar-wrapper">
-            <div class="sidebar-heading bg-primary text-white">
-                <i class="fas fa-shield-alt"></i> PETUGAS DASH
-            </div>
-            <div class="list-group list-group-flush">
-
-                <div class="list-group-item list-group-item-action bg-dark text-white-50">
-                    <small>Halo,</small><br>
-                    <?= htmlspecialchars($current_user['nama']) ?>
-                </div>
-
-                <a href="dashboard.php" class="list-group-item list-group-item-action bg-dark text-white <?= ($current_page == 'dashboard.php' ? 'active' : '') ?>">
-                    <i class="fas fa-calendar-alt me-2"></i> Jadwal Tugas
-                </a>
-
-                <a href="izin.php" class="list-group-item list-group-item-action bg-dark text-white <?= ($current_page == 'izin.php' ? 'active' : '') ?>">
-                    <i class="fas fa-file-signature me-2"></i> Pengajuan Izin
-                </a>
-
-                <a href="../index.php" class="list-group-item list-group-item-action bg-danger text-white mt-auto">
-                    <i class="fas fa-sign-out-alt me-2"></i> Logout
-                </a>
-            </div>
-        </div>
-        <div id="page-content-wrapper">
-
-            <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
-                <div class="container-fluid">
-                    <button class="btn btn-primary d-block d-md-none" id="menu-toggle">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                    <h5 class="my-2 ms-auto me-3 d-none d-md-block">Dashboard Petugas</h5>
-                </div>
-            </nav>
-
-            <div class="container-fluid py-4">
-
-                <h3 class="mb-4">Jadwal Tugas Anda</h3>
-
-                <div class="card shadow-sm">
-                    <div class="card-header bg-info text-white">
-                        <h5>Jadwal Mendatang (10 Entri Awal)</h5>
-                    </div>
-                    <div class="card-body">
-
-                        <div class="table-responsive">
-                            <table class="table table-striped table-hover">
-                                <thead class="table-dark">
-                                    <tr>
-                                        <th style="width: 50px;">No.</th>
-                                        <th>Tanggal</th>
-                                        <th>Slot</th>
-                                        <th>Peleton</th>
-                                        <th>Regu</th>
-                                        <th>Pos Tugas</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    $no = 1;
-                                    foreach ($jadwals as $j): ?>
-                                        <tr>
-                                            <td><?= $no++ ?></td>
-                                            <td><?= $j['tanggal'] ?></td>
-                                            <td><?= $j['slot'] ?></td>
-                                            <td><?= htmlspecialchars($j['nama_peleton'] ?? 'N/A') ?></td>
-                                            <td><?= htmlspecialchars($j['nama_regu'] ?? 'N/A') ?></td>
-                                            <td><?= htmlspecialchars($j['nama_pos'] ?? 'N/A') ?></td>
-                                        </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <?php if (empty($jadwals)): ?>
-                            <div class="alert alert-info mt-4">
-                                Anda belum memiliki jadwal tugas terbaru yang terdaftar.
-                            </div>
-                        <?php endif; ?>
-
+        <?php if ($jadwal): ?>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card peleton" data-type="peleton" data-id="<?= $jadwal['peleton_id'] ?>">
+                        <h5>Peleton</h5>
+                        <p><?= htmlspecialchars($jadwal['peleton_nama'] ?? '-') ?></p>
                     </div>
                 </div>
+                <div class="col-md-4">
+                    <div class="card regu" data-type="regu" data-id="<?= $jadwal['regu_id'] ?>">
+                        <h5>Regu</h5>
+                        <p><?= htmlspecialchars($jadwal['regu_nama'] ?? '-') ?></p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card pos" data-type="pos" data-id="<?= $jadwal['pos_id'] ?>">
+                        <h5>Pos</h5>
+                        <p><?= htmlspecialchars($jadwal['pos_nama'] ?? '-') ?></p>
+                    </div>
+                </div>
+            </div>
 
+        <?php else: ?>
+            <p class="no-schedule mt-5">Anda tidak memiliki jadwal piket aktif terdekat.</p>
+        <?php endif; ?>
+
+    </div>
+
+    <!-- Modal Detail Tim -->
+    <div class="modal fade" id="teamModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content bg-dark text-white">
+                <div class="modal-header">
+                    <h5 class="modal-title">Detail Tim</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="teamList">Memuat data...</div>
+                </div>
             </div>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Script untuk Toggle Sidebar
-        var el = document.getElementById("wrapper");
-        var toggleButton = document.getElementById("menu-toggle");
+        $(document).ready(function() {
+            $(".card").on("click", function() {
+                const type = $(this).data("type");
+                const id = $(this).data("id");
+                const tanggal = "<?= $jadwal['tanggal'] ?? $tomorrow ?>";
 
-        if (toggleButton) {
-            toggleButton.onclick = function() {
-                el.classList.toggle("toggled");
-            };
-        }
-        // Atur sidebar agar defaultnya muncul di desktop
-        if (window.innerWidth >= 768) {
-            el.classList.add("toggled");
-        }
+
+                $("#teamModal").modal("show");
+                $("#teamList").html("<div class='text-center text-muted'>Memuat data...</div>");
+
+                $.ajax({
+                    url: "get_team.php",
+                    type: "GET",
+                    data: {
+                        type,
+                        id,
+                        tanggal
+                    },
+                    success: function(data) {
+                        $("#teamList").html(data);
+                    },
+                    error: function() {
+                        $("#teamList").html("<div class='text-danger text-center'>Gagal memuat data.</div>");
+                    }
+                });
+            });
+
+            // === Grafik Bar (contoh data statis, bisa diganti dari DB) ===
+            const ctx = document.getElementById("peletonChart").getContext("2d");
+            new Chart(ctx, {
+                type: "bar",
+                data: {
+                    labels: ["Peleton A", "Peleton B", "Peleton C", "Peleton D"],
+                    datasets: [{
+                        label: "Jumlah Anggota",
+                        data: [10, 8, 12, 9],
+                        backgroundColor: ["#ef4444", "#f59e0b", "#10b981", "#3b82f6"]
+                    }]
+                },
+                options: {
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: "#fff"
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            ticks: {
+                                color: "#fff"
+                            }
+                        },
+                        y: {
+                            ticks: {
+                                color: "#fff"
+                            }
+                        }
+                    }
+                }
+            });
+        });
     </script>
 </body>
 

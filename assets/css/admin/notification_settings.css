@@ -1,0 +1,199 @@
+/* ============================================
+   🔥 STYLE: JADWAL GA - DAMKAR SCHEDULER
+   ============================================ */
+
+body {
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(180deg, #1a1a1a 0%, #2c2c2c 100%);
+    color: #ffffff;
+    margin: 0;
+    padding: 10px 0 10px;
+    /* ruang atas untuk navbar fixed */
+}
+
+/* ==============================
+   🟥 CARD & FORM STYLE
+   ============================== */
+.card {
+    border: none;
+    border-radius: 14px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(90deg, #b30000, #ff3333);
+    overflow: hidden;
+}
+
+.card-header {
+    background: linear-gradient(90deg, #b30000, #ff3333);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.card-body label {
+    font-weight: 600;
+    color: #444;
+}
+
+form button,
+.btn {
+    border-radius: 8px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+/* Tombol utama */
+.btn-danger {
+    background: linear-gradient(90deg, #d90429, #ef233c);
+    border: none;
+}
+
+.btn-danger:hover {
+    background: linear-gradient(90deg, #a30000, #d90429);
+}
+
+/* Tombol outline */
+.btn-outline-secondary {
+    border: 2px solid #999;
+    color: #333;
+}
+
+.btn-outline-secondary:hover {
+    background: #ddd;
+    border-color: #666;
+    color: #000;
+}
+
+/* ==============================
+   🧮 TABLE STYLE
+   ============================== */
+.table {
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.table thead {
+    background: #b30000;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.table th,
+.table td {
+    vertical-align: middle;
+    text-align: center;
+    padding: 10px 8px;
+    color: #ffffff;
+}
+
+.table-hover tbody tr:hover {
+    background: #ffe6e6;
+}
+
+.badge {
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.badge.bg-success {
+    background-color: #00b050 !important;
+}
+
+
+.table-responsive th,
+td,
+tr {
+    background: linear-gradient(90deg, #b30000, #ff3333);
+    color: #fff;
+}
+
+.daftar tr {
+    background: linear-gradient(90deg, #b30000, #ff3333);
+}
+
+.daftar td:first-child {
+    color: #ff4d4d;
+    font-weight: 700;
+    background: linear-gradient(90deg, #b30000, #ff3333);
+}
+
+
+.table-responsive {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(90deg, #b30000, #ff3333);
+}
+
+.badge.bg-warning {
+    background-color: #f7b500 !important;
+    color: #222 !important;
+}
+
+.badge.bg-info {
+    background-color: #007bff !important;
+}
+
+/* ==============================
+   🧾 MODAL STYLE
+   ============================== */
+.modal-content {
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    border: none;
+}
+
+.modal-header {
+    background: #b30000;
+    color: #fff;
+    border-bottom: none;
+}
+
+.modal-title {
+    font-weight: 700;
+}
+
+.modal-footer .btn-secondary {
+    background-color: #555;
+    border: none;
+}
+
+.modal-footer .btn-info {
+    background-color: #007bff;
+    border: none;
+}
+
+/* ==============================
+   🔍 SEARCH & FILTER STYLE
+   ============================== */
+#searchInput {
+    border-radius: 8px;
+    border: 2px solid #ccc;
+    padding: 8px 12px;
+    width: 280px;
+    transition: 0.3s;
+}
+
+#searchInput:focus {
+    border-color: #b30000;
+    box-shadow: 0 0 5px rgba(179, 0, 0, 0.5);
+}
+
+/* ==============================
+   📱 RESPONSIVE FIX
+   ============================== */
+@media (max-width: 768px) {
+    body {
+        padding-top: 70px;
+    }
+
+    .table-responsive {
+        font-size: 0.9rem;
+    }
+
+    #searchInput {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
